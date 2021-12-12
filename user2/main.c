@@ -1,6 +1,6 @@
 #include "lib.h"
 #include "console.h"
-#include "stdint.h"
+//#include "stdint.h"
 
 static void cmd_calc(void)
 {
@@ -20,6 +20,33 @@ static void cmd_get_total_memory(void)
     
     total = get_total_memoryu();
     printf("Total Memory is %dMB\n", total);
+}
+
+static int read_user_name(char *user_name)
+{
+    char ch[2] = { 0 };
+    int buffer_size = 0;
+
+    while (1) {
+        ch[0] = keyboard_readu();
+        
+        if (ch[0] == '\n' || buffer_size >= 80) {
+            printf("%s", ch);
+            break;
+        }
+        else if (ch[0] == '\b') {    
+            if (buffer_size > 0) {
+                buffer_size--;
+                printf("%s", ch);    
+            }           
+        }          
+        else {     
+            user_name[buffer_size++] = ch[0]; 
+            printf("%s", ch);        
+        }
+    }
+
+    return buffer_size;
 }
 
 static int read_cmd(char *buffer)
@@ -105,20 +132,29 @@ int main(void)
     int buffer_size = 0;
     int cmd = 0;
 
+    int cont = 0;
+
     while (1) {
+
+        if(cont == 0){
+            printf("Enter username : "); char user_name[80] = {0};
+            int userbuffsize = read_user_name(user_name);
+            cont =1;
+        }
+
         printf("x86_64-decOS @ MSC KIIT $ ~ ");
         buffer_size = read_cmd(buffer);
 
         //test-check if all the directories are acccessed by get root dir func
-        // int ls = 0;
-        // if(buffer[0] == 'l' && buffer[1] == 's') {
-        //     printf("lib\nuser1\nuser2\nuser3\nimg\nhome\ndecOS\n");
-        //     ls = 1;
-        // }
+        int ls = 0;
+        if(buffer[0] == 'l' && buffer[1] == 's') {
+            printf("lib\nuser1\nuser2\nuser3\nimg\nhome\ndecOS\n");
+            ls = 1;
+        }
 
-        // if (buffer_size == 0) {
-        //     continue;
-        // }
+        if (buffer_size == 0) {
+            continue;
+        }
         
         cmd = parse_cmd(buffer, buffer_size);
         
