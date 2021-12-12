@@ -6,8 +6,6 @@ objcopy -O binary user user2.bin
 # nasm -f elf64 -o start.o start.asm
 # gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c main.c
 # i686-elf-gcc -std=c99 -ffreestanding -fno-stack-protector -mno-red-zone -c main.c
-
-
 # ld -nostdlib -Tlink.lds -o user start.o main.o lib.a 
 # #ld -Tlink.lds -o user start.o main.o lib.a 
 # #objcopy -O binary user user2.bin

@@ -142,7 +142,7 @@ int main(void)
             cont =1;
         }
 
-        printf("x86_64-decOS @ MSC KIIT $ ~ ");
+        //printf("x86_64-decOS @ MSC KIIT $ ~ ");
         buffer_size = read_cmd(buffer);
 
         //test-check if all the directories are acccessed by get root dir func
