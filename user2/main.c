@@ -4,7 +4,46 @@
 
 static void cmd_calc(void)
 {
-    printf("hi i can calculate\n");
+    printf("Hello, I can calculate for you !!\n\n");
+    char n;     
+    float a,b,res;
+    printf("WELCOME TO THE DEC-OS CALCULATOR\n\n");
+    printf(" Enter the 1st number: ");  
+    scanf("%f", &a);
+    printf(" Select any operator from the following options: ( + , - , * , / )\n");  
+    scanf("%c", &n);
+    printf(" Enter the second number: ");
+    scanf("%f", &b);
+      
+    if (n == '+')
+    {  
+        res = a+b; 
+        printf("Addition of %f and %f is: %f", a,b, res);  
+    }  
+      
+    else if (n== '-')  
+    {  
+        res = a-b;
+        printf("Subtraction of %f and %f is: %f", a,b, res);  
+    }  
+      
+    else if(n == '*')  
+    {  
+        res = a * b; 
+        printf("Multiplication of %f and %f is: %f", a,b, res);  
+    }  
+      
+    else if(n== '/')  
+    { 
+        if (b == 0)   // if b == 0, take another number  
+        {  
+            printf ("\nDivisor can't be zero. Enter another value: ");  
+            scanf ("%f", &b);      
+        }  
+        res = a/b;  
+        printf (" Division of %f and %f is: %f",a,b, res);
+    }
+    printf("Thanks for using me !!");
 } 
 
 static void cmd_fetch(void)
